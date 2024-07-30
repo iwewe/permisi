@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <title>Kalkulator Permision File</title>
+    <script type="text/javascript" src="permisi.js"></script>
+</head>
+<body>
+    <div class="center-box">
+        <h1>Kalkulator Permision File</h1>
+        <noscript>
+            <p>Aktifkan JavaScript pada browser agar bisa bekerja sempurna.</p>
+        </noscript>
+        <p>Tuliskan tiga angka kode numerik untuk melihat efek permisinya.</p>
+        <div class="inset">
+            <form name="octal_to_perm" action="#" onsubmit="return showPermissions();">
+                <pre>
+chmod <input type="text" name="octal" size="4" maxlength="3" value="755"/> file.anda <input type="submit" value="Ganti Kepemilikan"/>
+<span id="permissions">-rwxr-xr-x</span> file.anda
+                </pre>
+                <div id="octalerror">&nbsp;</div>
+            </form>
+        </div>
+        <hr/>
+        <p>Tuliskan kombinasi berdasarkan simbol <b>r</b>, <b>w</b>, <b>x</b>, dan <b>-</b> untuk melihat hubungan kode numeriknya.</p>
+        <div class="inset">
+            <form name="perm_to_octal" action="#" onsubmit="return showOctal();">
+                <p><code>
+-<select name="user">
+    <option value="0">---</option>
+    <option value="1">--x</option>
+    <option value="2">-w-</option>
+    <option value="3">-wx</option>
+    <option value="4">r--</option>
+    <option value="5">r-x</option>
+    <option value="6">rw-</option>
+    <option value="7">rwx</option>
+</select><select name="group">
+    <option value="0">---</option>
+    <option value="1">--x</option>
+    <option value="2">-w-</option>
+    <option value="3">-wx</option>
+    <option value="4">r--</option>
+    <option value="5">r-x</option>
+    <option value="6">rw-</option>
+    <option value="7">rwx</option>
+</select><select name="other">
+    <option value="0">---</option>
+    <option value="1">--x</option>
+    <option value="2">-w-</option>
+    <option value="3">-wx</option>
+    <option value="4">r--</option>
+    <option value="5">r-x</option>
+    <option value="6">rw-</option>
+    <option value="7">rwx</option>
+</select>
+file.anda <input type="submit" value="Lihat Numeriknya"/>
+                </code></p>
+                <p><code>chmod <span id="numeric">000</span> file.anda</code></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
