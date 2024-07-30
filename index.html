@@ -1,0 +1,172 @@
+<html>
+ <head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<link rel="stylesheet" type="text/css" href="/web/20091130192818cs_/http://t4mp4h.org/permisi/style.css"/>
+<title>Kalkulator Permision File </title>
+<script type="text/javascript">
+// <![CDATA[
+var alpha = new Array(
+	"---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx"
+);
+
+function trim( str )
+{
+	str = str.replace( /\s+$/, "" );
+	str = str.replace( /^\s+/, "" );
+	return str;
+}
+
+function showPermissions( )
+{
+	var err = document.getElementById( "octalerror" );
+	var perm = document.getElementById( "permissions" );
+	var octal = document.octal_to_perm.octal.value;
+	var valid = /^[0-7]+$/;
+	var txt;
+	var i;
+	var permStr;
+	var zeros = "000";
+
+	octal = trim(octal);
+	if (octal.search(valid) >= 0)
+	{
+		permStr = "-";
+		if (octal.length < 3)
+		{
+			octal = zeros.substr(0, 3 - octal.length) + octal;
+		}
+		for (i=0; i < octal.length; i++)
+		{
+			permStr = permStr + alpha[octal.charAt(i)];
+		}
+		permStr = permStr;
+		txt = document.createTextNode( permStr );
+		perm.replaceChild( txt, perm.firstChild );
+		txt = document.createTextNode( "\u00a0" );		
+	}
+	else
+	{
+		if (octal == "")
+		{
+			octal = "Your input";
+		}
+		txt = document.createTextNode( octal +
+			" does not consist of three digits in the range 0 to 7" );
+	}
+	err.replaceChild( txt, err.firstChild );
+	return false;
+}
+
+function showOctal()
+{
+	var octal = "";
+	var obj = document.getElementById( "numeric" );
+	var txt;
+	var choice;
+	choice = document.perm_to_octal.user.selectedIndex;
+	octal = octal +
+		document.perm_to_octal.user.options[choice].value;
+	choice = document.perm_to_octal.group.selectedIndex;
+	octal = octal +
+		document.perm_to_octal.group.options[choice].value;
+	choice = document.perm_to_octal.other.selectedIndex;
+	octal = octal +
+		document.perm_to_octal.other.options[choice].value;
+	txt = document.createTextNode( octal );
+	obj.replaceChild( txt, obj.firstChild);
+	return false;
+}
+// ]]>
+</script>
+</head>
+
+<body>
+<h1>Kalkulator Permision file</h1>
+<noscript>
+<p>
+Aktifkan JavaScript pada browser agar bisa bekerja sempurna.
+</p>
+</noscript>
+
+<p>
+Tuliskan tiga angka kode numerik untuk melihat efek permisinya.
+</p>
+
+<div class="inset">
+<form name="octal_to_perm" action="#" onsubmit="return showPermissions();">
+<pre>
+chmod <input type="text" name="octal" size="4" maxlength="3" value="755"/> file.anda <input type="submit" value="Ganti Kepemilikan"/>
+
+<span id="permissions">-rwxr-xr-x</span> file.anda
+</pre>
+<div id="octalerror">&nbsp;</div>
+
+</form>
+</div>
+
+<hr/>
+<p>
+Tuliskan kombinasi berdasarkan simbol <b>r</b>, <b>w</b>, <b>x</b>, dan <b>-</b> untuk melihat hubungan kode numeriknya.
+</p>
+
+<div class="inset">
+<form name="perm_to_octal" action="#" onsubmit="return showOctal();">
+<p><code>
+-<select name="user">
+	<option value="0">---</option>
+	<option value="1">--x</option>
+
+	<option value="2">-w-</option>
+	<option value="3">-wx</option>
+	<option value="4">r--</option>
+	<option value="5">r-x</option>
+	<option value="6">rw-</option>
+	<option value="7">rwx</option>
+
+	</select><select name="group">
+	<option value="0">---</option>
+	<option value="1">--x</option>
+	<option value="2">-w-</option>
+	<option value="3">-wx</option>
+	<option value="4">r--</option>
+
+	<option value="5">r-x</option>
+	<option value="6">rw-</option>
+	<option value="7">rwx</option>
+	</select><select name="other">
+	<option value="0">---</option>
+	<option value="1">--x</option>
+
+	<option value="2">-w-</option>
+	<option value="3">-wx</option>
+	<option value="4">r--</option>
+	<option value="5">r-x</option>
+	<option value="6">rw-</option>
+	<option value="7">rwx</option>
+
+	</select>
+	
+	file.anda <input type="submit" value="Lihat Numeriknya"/></code>
+</p>
+<p>
+<code>chmod <span id="numeric">000</span> file.anda</code>
+</p>
+</form>
+</div>
+
+<table width="100%">
+
+<tr>
+<td width="33%" align="left">
+</td>
+<td width="33%" align="center">
+</td>
+<td width="33%" align="right">
+
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>
